@@ -39,6 +39,7 @@ lazy val dependencies =
     val typesafeConfigVersion = "1.3.1"
     val akkaVersion = "2.5.26"
     val akkaHttpVersion = "10.1.11"
+    val configVersion = "1.2.1"
 
     val slf4j = "org.slf4j" % "jcl-over-slf4j" % slf4jVersion
     val typesafeConfig = "com.typesafe" % "config" % typesafeConfigVersion
