@@ -17,5 +17,3 @@ project/plugins/project/
 .scala_dependencies
 .worksheet
 .idea
-
-quotesAPI/src/main/resources/application.conf
