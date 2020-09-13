@@ -7,7 +7,6 @@ import com.wsoczek.smartwallet.{Asset, Stock}
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 
-
 class StockRequest(val symbol: String) extends Request {
   override def perform(): Future[Asset] = {
     val request = getRequest()

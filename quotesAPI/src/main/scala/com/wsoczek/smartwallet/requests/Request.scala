@@ -12,7 +12,6 @@ import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
 import scala.concurrent.duration._
 
-
 trait Request extends Configuration {
   implicit val system: ActorSystem = ActorSystem()
   implicit val materializer: ActorMaterializer = ActorMaterializer()
@@ -21,15 +20,18 @@ trait Request extends Configuration {
   val uri: String = appProperties.getConfig("api").getString("uri")
   val path: String = appProperties.getConfig("api").getString("path")
 
-  def getRequest(queryParams: Map[String, String] = Map.empty) = HttpRequest(uri = getUrl(queryParams))
-
-  def getUrl(queryParams: Map[String, String]): Uri = Uri(uri)
-    .withPath(Path(path))
-    .withQuery(Query(Map("symbol" -> symbol, "token" -> token) ++ queryParams))
-
   def perform(): Future[Asset]
 
   def symbol: String
+
+  def getRequest(queryParams: Map[String, String] = Map.empty) =
+    HttpRequest(uri = getUrl(queryParams))
+
+  def getUrl(queryParams: Map[String, String]): Uri =
+    Uri(uri)
+      .withPath(Path(path))
+      .withQuery(
+        Query(Map("symbol" -> symbol, "token" -> token) ++ queryParams))
 
   def sendRequest(httpRequest: HttpRequest): Future[HttpEntity] = {
     val responseFuture: Future[HttpResponse] = Http().singleRequest(httpRequest)

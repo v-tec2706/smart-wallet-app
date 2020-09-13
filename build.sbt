@@ -1,3 +1,5 @@
+
+
 name := "smart-wallet-app"
 organization in ThisBuild := "com.wsoczek"
 scalaVersion in ThisBuild := "2.12.3"
@@ -26,11 +28,30 @@ lazy val smartWalletApp = project
     name := "SmartWalletApp",
     settings,
     assemblySettings,
-    libraryDependencies ++= commonDependencies
+    libraryDependencies ++= smartWalletAppDependencies
   )
   .dependsOn(
     quotesAPI
   )
+
+lazy val akkaHttpVersion = "10.0.11"
+lazy val akkaVersion = "2.5.11"
+lazy val bountyCastleVersion = "1.59"
+
+lazy val smartWalletAppDependencies = Seq(
+  "com.typesafe.akka" %% "akka-http" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-slf4j" % akkaVersion,
+  "ch.qos.logback" % "logback-classic" % "1.0.0" % "runtime",
+  "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-http-xml" % akkaHttpVersion,
+  "com.typesafe.akka" %% "akka-stream" % akkaVersion,
+  "com.typesafe.akka" %% "akka-http-testkit" % akkaHttpVersion % Test,
+  "com.typesafe.akka" %% "akka-testkit" % akkaVersion % Test,
+  "com.typesafe.akka" %% "akka-stream-testkit" % akkaVersion % Test,
+  "com.typesafe.akka" %% "akka-http-caching" % akkaHttpVersion,
+  "org.scalatest" %% "scalatest" % "3.0.1" % Test
+)
+
 
 // DEPENDENCIES
 lazy val dependencies =
@@ -46,6 +67,9 @@ lazy val dependencies =
     val typesafeAkkaStream = "com.typesafe.akka" %% "akka-stream" % akkaVersion
     val typesafeAkkaHttp = "com.typesafe.akka" %% "akka-http" % akkaHttpVersion
     val typesafeAkkaHttpSprayJson = "com.typesafe.akka" %% "akka-http-spray-json" % akkaHttpVersion
+    val sprayCan = "io.spray" % "spray-can" % "1.3.1"
+    val sprayHttp = "io.spray" % "spray-http" % "1.3.4"
+    val sprayRouting = "io.spray" % "spray-routing" % "1.1.0"
   }
 
 lazy val commonDependencies = Seq(
